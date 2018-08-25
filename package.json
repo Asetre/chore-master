@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "babel server.js"
   },
   "author": "",
   "license": "MIT",
@@ -13,5 +13,9 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "mongoose": "^5.2.9"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
   }
 }
