@@ -1,6 +1,7 @@
-import express from 'express'
+const express = require('express')
+const userRouter = express.Router()
 
-export const userController = express.Router
-
-userController.post('/create', (req, res) => {
+userRouter.post('/create', (req, res) => {
 })
+
+module.exports = userRouter
