@@ -4,6 +4,8 @@ const Schema = mongoose.Schema
 const userSchema = new Schema({
   name: {type: String, required: true},
   slug: {type: String, required: true},
+  teams: Array,
+  authID: String,
   points: Number,
   tasks: Array,
   completedTasks: Array,

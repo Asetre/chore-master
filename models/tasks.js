@@ -5,7 +5,7 @@ const tasksSchema = new Schema({
   name: {type: String, required: true},
   slug: {type: String, required: true},
   reward: String,
-  team: String,
+  team: {type: String, required: true},
   user: String,
   completed: Boolean,
   created_by: {type: String, required: true},

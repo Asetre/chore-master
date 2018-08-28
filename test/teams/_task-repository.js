@@ -1,9 +1,13 @@
-const Tasks = require('../models/tasks')
+const Tasks = require('./_task-db')()
 
 module.exports = function() {
   return {
+    resetDB: () => {
+      Tasks.resetDB()
+    },
     findByID: (id) => {
-      return Tasks.findById({_id: id})
+      return Tasks.findById(id)
+      .then((task) => task)
     },
     createTask: (taskInfo) => {
       return Tasks.create(taskInfo)

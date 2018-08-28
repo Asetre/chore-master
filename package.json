@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --recursive",
     "start": "babel-node server.js --presets env"
   },
   "author": "",
@@ -17,5 +17,10 @@
     "passport": "^0.4.0",
     "passport-auth0": "^1.0.0",
     "passport-http-bearer": "^1.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "uniqid": "^5.0.3"
   }
 }

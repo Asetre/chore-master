@@ -35,8 +35,10 @@ app.use((req, res, next) => {
 })
 
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(router)
 
+var server = null
 const startServer = () => {
   return mongoose.connect(mongoUrl, {
     //old urlParser deprecated
@@ -44,10 +46,26 @@ const startServer = () => {
   })
     .then(() => {
       console.log('connected to db')
-      app.listen(port, () => {
+      server = app.listen(port, () => {
         console.log(`Server listening on port: ${port}`)
       })
     })
 }
 
-startServer()
+const closeServer = () => {
+  return mongoose.disconnect()
+  .then(() => {
+    server.close()
+  })
+  .catch((err) => {
+    //eslint-disable-next-line
+    console.log(err)
+    server.close()
+  })
+}
+
+if(require.main === module) {
+  startServer()
+}
+
+module.exports = {startServer, closeServer}
