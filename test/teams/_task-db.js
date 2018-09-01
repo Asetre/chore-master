@@ -34,8 +34,8 @@ module.exports = function () {
 
     update(updates, taskID) {
       return new Promise((resolve, reject) => {
-        let team = this.db[taskID]
-        let task = {
+        let task = this.db[taskID]
+        task = {
           ...task,
           ...updates
         }

@@ -1,5 +1,5 @@
 String.prototype.slugify = function () {
-  this.toLocaleLowerCase()
+  this.toLowerCase()
   let escapeRegexChars = this.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1")
   return escapeRegexChars.replace(new RegExp(' ', 'g'), '-');
 }
@@ -71,13 +71,13 @@ module.exports = function (TeamRepository, TaskRepository) {
       //todo: check if user exists
 
       let taskUpdates = {
-        deleted_at: new Date().toISOString
+        deleted_at: new Date().toISOString()
       }
 
       await TeamRepository.removeTaskFromTeam(taskID, teamID)
       await TaskRepository.updateTask(taskUpdates, taskID)
     },
-    updateTask: async (teamID, userID, taskID,taskUpdates) => {
+    updateTask: async (teamID, userID, taskID, taskUpdates) => {
       let team = await TeamRepository.findByID(teamID)
       let task = await TaskRepository.findByID(taskID)
 

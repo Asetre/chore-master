@@ -1,5 +1,4 @@
 const express = require('express')
-const passport = require('passport')
 const userRouter = require('./controller/users')
 const teamRouter = require('./controller/teams')
 
@@ -14,9 +13,9 @@ router.get('/health', (req, res) => {
 })
 
 router.get('/login',
-  passport.authenticate('auth0', {}),
   (req, res) => {
-    res.redirect('/')
+    console.log('login attempt')
+    res.send('test')
   }
 )
 

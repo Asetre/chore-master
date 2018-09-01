@@ -13,10 +13,8 @@ module.exports = function() {
       return Tasks.create(taskInfo)
    },
    updateTask: (updates, taskID) => {
-     return Tasks.update(
-       {_id: taskID},
-       {$set: {...updates}}
-    )
+     return Tasks.update(updates, taskID)
+     .then((task) => task)
    }
   }
 }

@@ -4,18 +4,6 @@ const bodyParser = require('body-parser')
 const router = require('./router')
 const {port, mongoUrl} = require('./config')
 const app = express()
-const passport = require('passport')
-const strategy = require('./passport-strategy')
-const session = require('express-session')
-
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}))
-
-passport.use(strategy)
 
 app.use((req, res, next) => {
   // Website you wish to allow to connect
@@ -65,6 +53,7 @@ const closeServer = () => {
 }
 
 if(require.main === module) {
+  console.log(mongoUrl)
   startServer()
 }
 

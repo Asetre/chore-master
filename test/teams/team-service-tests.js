@@ -6,6 +6,9 @@ const assert = chai.assert
 const { startServer, closeServer } = require('../../server')
 const uniqid = require('uniqid')
 
+//todo: add messages for asserts
+//todo: assert types
+
 const _createTeam = async () => {
   let userID = uniqid()
   let team = await TeamService.createTeam('Foo bar Bizz Bazz', userID)
@@ -90,5 +93,32 @@ describe('Team Service Unit Test', function () {
     let team = await TeamRepository.findByID(teamID)
 
     await TeamService.deleteTask(taskID, userID, teamID)
+
+    let updatedTeam = await TeamRepository.findByID(teamID)
+    let updatedTask = await TaskRepository.findByID(taskID)
+    let updatedTeamTasks = updatedTeam.tasks
+
+    assert.notInclude(updatedTeamTasks, taskID)
+    assert.exists(updatedTask.deleted_at)
+    assert.typeOf(updatedTask.deleted_at, 'string')
   })
+
+  it('Should update a task', async function() {
+    let { userID, teamID } = await _createTeam()
+    let taskID = await _createTask(userID, teamID)
+    let team = await TeamRepository.findByID(teamID)
+
+    let taskUpdates = {
+      name: 'New task name',
+      reward: 'new task reward'
+    }
+
+    await TeamService.updateTask(teamID, userID, taskID, taskUpdates)
+
+    let updatedTask = await TaskRepository.findByID(taskID)
+
+    assert.equal(updatedTask.name, taskUpdates.name)
+    assert.equal(updatedTask. reward, taskUpdates.reward)
+  })
+
 })

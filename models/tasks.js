@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
+//todo: remove slug
 const tasksSchema = new Schema({
   name: {type: String, required: true},
   slug: {type: String, required: true},

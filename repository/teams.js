@@ -4,17 +4,17 @@ module.exports = function() {
   return {
     findByID: (id) => {
       return Teams.findById(id)
-      .then((team) => team)
+      .then((team) => team.deleted_at ? null : team)
     },
     createTeam: (newTeam) => {
       return Teams.create(newTeam)
+      .then((team) => team)
     },
     updateTeam: (updates, teamID) => {
-      return Teams.update(
+      return Teams.updateOne(
         {_id: teamID}, 
         {$set: {...updates}}
       )
-      .then((team) => team)
     },
     removeTaskFromTeam: (taskID, teamID) => {
       return Teams.update(
